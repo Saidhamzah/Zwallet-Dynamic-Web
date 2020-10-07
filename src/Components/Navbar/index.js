@@ -23,10 +23,10 @@ class Bar extends Component{
                     </Navbar.Brand>
                     
                         <Nav className="d-flex align-items-center">                        
-                            <img src={this.props.img} width="50px" height="50px" alt=""/>
+                            <img src={this.props.data.img} width="50px" height="50px" alt=""/>
                                 <div className="mx-3">
-                        <div className="font-weight-bold">{this.props.fullName}</div>
-                        <div className="small">+{this.props.phoneNumber}</div>
+                        <div className="font-weight-bold">{this.props.data.fullName}</div>
+                        <div className="small">+{this.props.data.phoneNumber}</div>
                                  </div>
                                 <img src={BellIcon} alt=""/>
                     </Nav>

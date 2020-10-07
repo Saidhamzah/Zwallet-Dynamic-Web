@@ -29,7 +29,7 @@ class App extends Component {
         <Container className='font_nunito'>
           <Row>
             <Col lg="3">
-              <Menu/>
+              <Menu data={this.state.data}/>
             </Col>
             <Col lg="9">
               <Switch>

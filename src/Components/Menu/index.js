@@ -7,12 +7,13 @@ import ProfileIcon from "../Assets/Icon/user.svg";
 import LogoutIcon from "../Assets/Icon/log-out.svg";
 class Menu extends Component {
   render() {
+      console.log(this.props.data.id)
     return (
       <div className="bg-white navigation d-flex flex-column justify-content-between rounded-14 p-4 shadow_box ">
         <ul className="m-0 pl-4">
           <li className="d-flex align-items-center py-4 ">
             <img src={DashboardIcon} alt=""/>
-            <Link to="/home/" className="ml-3 text-secondary"> Dashboard</Link>
+            <Link to={{pathname:`/home/${this.props.data.id}`}} className="ml-3 text-secondary"> Dashboard</Link>
           </li>
           <li className="d-flex align-items-center py-4 active">
             <img src={TransferIcon} alt=""/>

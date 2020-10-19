@@ -278,3 +278,14 @@ cursor: pointer;
 .font_softGrey{
   color: #DFDCDC
 }
+.bt_prf{
+width: 433px;
+height: 70px;
+left: 648px;
+top: 481px;
+border: 0.5px;
+background: #E5E8ED;
+border-radius: 10px;
+text-align: left;
+font-size: 16px;
+}

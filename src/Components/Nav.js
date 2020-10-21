@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { Container, Navbar, Form } from "react-bootstrap";
-import BellIcon from "../Assets/Icon/bell.svg";
+import React from "react";
+import { Container, Navbar } from "react-bootstrap";
+// import BellIcon from "../Assets/Icon/bell.svg";
 import axios from "axios";
 import { TextBlock } from "react-placeholder/lib/placeholders";
-import { GetUsers } from "../redux/actions/Users";
+import { Users } from "../redux/actions/Users";
 import { useDispatch, useSelector } from "react-redux";
 
 const Nav =()=> {
@@ -11,11 +11,10 @@ const Nav =()=> {
     const dispatch = useDispatch();
     const { data, loading, error } = useSelector((s) => s.Users);
     const Auth = useSelector((s) => s.Auth);
+    // console.log(Auth.data.data.token, 'hmmm')
     React.useEffect(()=>{
-        dispatch(GetUsers({
-            page: 1,
-            limit: 1,
-            token: Auth.data.data.token
+        dispatch(Users({
+            token: "Bearer "+Auth.data.token
         }))
         console.log(data, 'sini cuy');
     }, [])
@@ -27,13 +26,18 @@ const Nav =()=> {
           </Navbar.Brand>
 
           <nav className="d-flex align-items-center">
-            <img src={data[0].img} width="50px" height="50px" alt="" />
+            <img src={data[0].img} 
+            width="50px" height="50px" alt="" />
             <div className="mx-3">
 
-              <div className="font-weight-bold">{data[0].fullName}</div>
-              <div className="small">+{data[0].phoneNumber}</div>
+              <div className="font-weight-bold">
+                {data[0].firstName+" "+data[0].lastName}
+                </div>
+              <div className="small">+
+              {data[0].phoneNumber}
+              </div>
             </div>
-            <img src={BellIcon} alt="" />
+            <img src="/Assets/Icon/bell.svg" alt="" />
           </nav>
         </Container>
       </Navbar>

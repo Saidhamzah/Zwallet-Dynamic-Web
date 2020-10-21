@@ -19,18 +19,19 @@ const UsersError = (error)=> {
     }
 }
 
-export const GetUsers = (fields) => {
+export const Users = (fields) => {
     return (dispatch) =>{
         dispatch(UsersRequest())
+        // console.log(fields.token,'cek sini gan')
         return Axios({
             method: 'GET',
             url: `http://localhost:7000/user/profile`,
             headers:{
-                'auth-token': fields.token
+                'token': fields.token
             }
         }).then((res)=> {
-            const data = res.data.data.data
-            console.log(data, 'aaa')
+            const data = res.data.data
+            console.log(data, 'aaaaaaaa')
             dispatch(UsersSuccess(data))
         }).catch((err)=> {
             const message = err.message

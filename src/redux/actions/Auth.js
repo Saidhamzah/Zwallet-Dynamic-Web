@@ -24,17 +24,17 @@ const AuthLoginError = (error) => {
 // }
 
 export const AuthLogin = (fields) => {
-    console.log(fields, "yamete")
+    // console.log(fields, "look at here")
   return (dispatch) => {
     dispatch(AuthLoginRequest());
     return Axios({
-      method: "GET",
+      method: "POST",
       data: fields,
       url: "http://localhost:7000/auth/login",
     })
       .then((res) => {
         const data = res.data;
-        console.log(data, "dataas");
+        // console.log(data, "dataas");
         dispatch(AuthLoginSuccess(data));
         // fields.history.replace('/dashboard')
       })

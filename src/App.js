@@ -3,6 +3,7 @@ import Axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import {
   Navbar,
   Footer,
@@ -13,6 +14,7 @@ import {
   TransactionHistory,
   Profile,
 } from "./Page";
+import { Nav } from "./Components";
 // import PersonalInfo from "./Page/Profile/personalInfo";
 // import Changepw from "./Page/Profile/changePassword";
 import { PrivateRoute, PublicRoute } from "./Components";
@@ -36,11 +38,10 @@ const Routes = () => {
     // (document.body.className = "body"),
     // (
       <Router>
+        {/* <Nav/> */}
         {/* <Navbar 
         // data={this.state.data} 
         /> */}
-        <Container className="font_nunito">
-          <Row>
             {/* <Col lg="3">
               <Menu 
               // data={this.state.data} 
@@ -51,6 +52,7 @@ const Routes = () => {
               <Switch>
                 <PrivateRoute exact path="/home" component={Home} />
                 <PrivateRoute exact path="/transfer" component={Transfer} />
+                <PrivateRoute exact path="/topup" component={Topup} />
                 {/* <Route exact path="/home" /> */}
                 {/* <Route exact path="/transfer/:id" component={()=><Transfer data={this.state.data}/>}/>
                 <Route exact path="/topup/:id" component={Topup}/>
@@ -61,9 +63,6 @@ const Routes = () => {
                 <PrivateRoute component={Profile} path="/profile" />
                 <PublicRoute component={Login} restricted={true} path="/login" />
               </Switch>
-          </Row>
-        </Container>
-        {/* <Footer /> */}
       </Router>
     // )
   );

@@ -1,73 +1,84 @@
-import React, {Component} from 'react'
-import axios from 'axios'
-class Search extends Component{
-    constructor(props) {
-        super()
-        this.state = {
-            query: '',
-            data: []
-        }
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { Nav } from "../../Components";
+import { Menu, Footer } from "../";
+import { Container, Row, Col } from "react-bootstrap";
+import { GetTransferSearch } from "../../redux/actions/getUser";
+import { useDispatch, useSelector } from "react-redux";
 
-        // this.handleChange = this.handleChange.bind(this)
-    }
-    
-    async componentDidMount() {
-            const id= this.props.data.id
-        
-        const res = await axios.get(`http://localhost:7000/transfer/${id}`)
-        this.setState({ data: res.data.data})
-    }
-
-    async handleChange(e) {
-        this.setState({ query:e.target.value })
-        const res = await axios.get(`http://localhost:7000/user/search/3`, {
-            params: {
-                search: this.state.query
-            }
-        })
-
-        if(res.data.data.length > 0) {
-            this.setState({ data: res.data.data })
-        }
-    }
-    render(){
-        return(  
-            <div className=" pl-lg-2 mt-2 mt-lg-0">
-            <div className=" rounded-14 shadow_box bg-white">
-            <div className="pt-4 mx-4">
-                <div className="font-weight-bold mb-4">Search Receiver</div>
-                <div className="form-group input ">
-                    <input type="text" autoComplete="off" className="form-control pl-5" placeholder="Search receiver here"/>
-                    <img src="/Assets/Icon/search-icon.svg" alt=""/>
+class Search extends Component {
+  render() {
+    const ContentSearch = () => {
+      const dispatch = useDispatch();
+      const { data, loading, error } = useSelector((s) => s.getUser);
+      const Auth = useSelector((s) => s.Auth);
+    //   const [search, setSearch]= React.useState("")
+      // console.log(Auth.data.data.token, 'hmmm')
+      React.useEffect(() => {
+        dispatch(
+          GetTransferSearch({
+            token: "Bearer " + Auth.data.token
+          })
+        );
+        console.log(data, "sini cuy");
+      }, []);
+      console.log(data, "arung");
+      return (
+        <div className="col-lg-12">
+          <div className="bg-white p-4">
+            <div>
+              <div>
+                <div className="font-weight-bold">Search Receiver</div>
+                <div className="form-group pt-3">
+                  <input 
+                //   onChange={(e)=>setSearch(e.target.value)}
+                    type="text"
+                    className="form-search py-1 w-100"
+                    placeholder="Search receiver here"
+                  />
                 </div>
-
-                <div className="pb-2">
-                    <div  style={{overflowY:'scroll', height: '60vh'}}>
-                        {this.state.data.map((item, index) => {
-                        return (
-                            
-                            <div key={index} className="row mx-4">
-                                <div className="col-lg-12 d-flex border_line rounded-10 mx-3 ">
-                                    <div className="d-flex align-item-center ">
-                                        <img className="my-3" width="50px" height="50px" src={item.photo} alt="" />
-                                        <div className=" font_nunito mx-3 pt-3">
-                                            <div className="font_med">{item.fullName}</div>
-                                            
-                                            <div className="color_grey"> +{item.phoneNumber}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                    
-                            </div>
-                            
-                            )
-                        })}
+              </div>
+              {data.map((item, index) => {
+                return (
+                  <Link  key={index} className="font_bold text-dark">
+                    <div className="d-flex justify-content-between align-items-center py-3 px-3 bg-white rounded-14 font_nunito">
+                      <div className="d-flex">
+                        <img height="56px" width="56px" src={item.img} alt="" />
+                        <div className="ml-2">
+                          <div className="font-weight-bold">
+                            {item.fullName}
+                          </div>
+                          <div className="small mt-2">+{item.phoneNumber}</div>
                         </div>
+                      </div>
                     </div>
-                </div>
+                  </Link>
+                );
+              })}
             </div>
-            </div>
-            )
-    }
+          </div>
+        </div>
+      );
+    };
+    return (
+      <>
+        <Nav />
+        <Container>
+          <Row>
+            <Col lg="3">
+              <Menu />
+            </Col>
+            <Col lg="9" className="pl-lg-2 mt-2 mt-lg-0">
+              <div className="d-flex justify-content-between rounded-10 shadow_box">
+                <ContentSearch />
+              </div>
+            </Col>
+          </Row>
+        </Container>
+        <Footer />
+      </>
+    );
+  }
 }
-export default Search
+
+export default Search;

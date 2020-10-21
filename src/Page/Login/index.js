@@ -6,7 +6,7 @@ import { AuthLogin } from "../../redux/actions/Auth";
 
 const Login = (props) => {
 //   console.log(props, 'ahha')
-  const [username, setUsername] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const dispatch = useDispatch();
 
@@ -20,11 +20,11 @@ const Login = (props) => {
     // })
     dispatch(
       AuthLogin({
-        email: username,
+        email: email,
         password: password
       })
     );
-    console.log(username, password, 'yuhu')
+    // console.log(email, password, 'yuhu')
   };
 
   return (
@@ -36,7 +36,7 @@ const Login = (props) => {
           <input
             type="text"
             name="email"
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </label>
         <label>

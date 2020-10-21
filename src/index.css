@@ -289,3 +289,14 @@ border-radius: 10px;
 text-align: left;
 font-size: 16px;
 }
+
+input[type="text"].form-search {
+  background: url("/assets/icon/search-icon.svg") no-repeat 5px 5px;
+  padding-left: 45px;
+  background-color: rgba(58, 61, 66, 0.1);
+  border-radius: 8px;
+}
+input[type="text"].form-search:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

@@ -36,10 +36,6 @@ class Bar extends Component{
                                  </div>
                                 <img src='/Assets/Icon/bell.svg' alt=""/>
                     </Nav>
-                    
-
-                        
-    
                 </Container>
             </Navbar>
         )
